@@ -65,11 +65,11 @@ public class JwtService {
     }
 
     // Generate token for user
-    private String generateToken(UserDetails userDetails, long expiration) {
+    private String generateToken(UserDetails userDetails) {
         return Jwts.builder()
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expiration))
+                .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getSignInKey(), Jwts.SIG.HS256)
                 .compact();
     }
